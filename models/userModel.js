@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const {Schema , model} = mongoose
 const validator = require('validator')
+const bcrypt = require('bcryptjs')
 
 const userModel = new Schema({
     username: {
@@ -17,10 +18,24 @@ const userModel = new Schema({
     },
     password: {
         type: String,
+        select:false,
         required: [true, 'Please enter your password'],
         minLength:[8, 'Password must be at least 8 characters long']
     }
 })
+
+userModel.pre('save', async function(next){
+    this.password = await bcrypt.hash(this.password, 10)
+    next()
+})
+
+userModel.methods.comparePassword = async function(enteredPassword){
+    return await bcrypt.compare(enteredPassword, this.password)
+}
+
+
+
+
 
 const User = model('user', userModel)
 
