@@ -35,3 +35,14 @@ exports.signin = async (req, res, next) =>{
         res.status(500).json(error)
     }
 }
+
+
+exports.uploadimg = async (req, res, next) => {
+    try {
+        
+        
+
+    } catch (error) {
+        res.status(500).json({error :error.message})
+    }
+}

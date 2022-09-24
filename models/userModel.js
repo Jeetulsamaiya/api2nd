@@ -21,7 +21,12 @@ const userModel = new Schema({
         select:false,
         required: [true, 'Please enter your password'],
         minLength:[8, 'Password must be at least 8 characters long']
+    },
+    image:{
+        type : String,
+        default: "avatar.png"
     }
+    
 })
 
 userModel.pre('save', async function(next){

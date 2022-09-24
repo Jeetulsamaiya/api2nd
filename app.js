@@ -18,7 +18,7 @@ require('./db/db').dbconnection()
 
 // cors
 const cors = require('cors')
-app.use(cors())
+app.use(cors({"credentials": true,}))
 
 
 app.use(logger('dev'));
